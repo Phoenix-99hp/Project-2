@@ -1,4 +1,4 @@
-// Create the Pet model
+// Create the Comment model
 module.exports = function (sequelize, DataTypes) {
     var Comment = sequelize.define("Comment", {
         // Create a column for the comment text. The text cannot be null or blank.
@@ -11,16 +11,16 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    // Not sure if the below section is correct or necessary yet. 
+    // Associate comments
     Comment.associate = function (models) {
-        // A Comment must belong to a User and a Pet
-        // A Comment can't be created without a User and a Pet due to the foreign key not allowing null. 
+        // A Comment must belong to a User and an Official
+        // A Comment can't be created without a User and an Official due to the foreign key not allowing null. 
         Comment.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
         });
-        Comment.belongsTo(models.Pet, {
+        Comment.belongsTo(models.Official, {
             foreignKey: {
                 allowNull: false
             }
