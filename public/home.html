@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Animal Archive</title>
+    <title>Look Up Representatives</title>
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" href="./stylesheets/reset.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
@@ -21,9 +21,20 @@
         </div>
         <div class="row center search-row">
             <div class="col-md-12 search">
-                <input type="Text"></input><button id="searchBtn">Search</button>
+                <label>Street: </label><input type="Text" id="street"></input>
             </div>
         </div>
+        <div class="row center search-row">
+            <div class="col-md-12 search">
+                <label>City: </label><input type="Text" id="city"></input>
+            </div>
+        </div>
+        <div class="row center search-row">
+            <div class="col-md-12 search">
+                <label>State: </label><input type="Text" id="state"></input>
+            </div>
+        </div>
+        <button id="searchBtn">Search</button>
 
         <div class="row pet-row">
             <div class="col-md-3 pet">
@@ -36,7 +47,7 @@
                 <h4>Rep 3</h4>
             </div>
             <div class="col-md-3 pet">
-                <h4>Pet 4</h4>
+                <h4>Rep 4</h4>
             </div>
         </div>
     </div>

@@ -28,3 +28,7 @@ button {
 .search {
   margin-top: 20px;
 }
+
+.searchBtn {
+  position: absolute;
+}
