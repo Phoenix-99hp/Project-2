@@ -6,5 +6,5 @@ $("#searchBtn").on("click", function (e) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-    })
+    });
 });
