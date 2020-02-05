@@ -3,11 +3,22 @@ var db = require("../models");
 var passport = require("../config/passport");
 
 module.exports = function(app) {
-  //   app.get("/api/examples", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.json(dbProject);
-  //   });
-  // });
+  app.get("/api/home", function(req, res) {
+    db.Official.findAll({}).then(function(dbProject) {
+      res.json(dbProject);
+    });
+  });
+
+  app.get("/api/official/:id", function(req, res) {
+    db.Official.findOne({
+      where: {
+        id: req.params.id
+      }
+      // include: [db.Comments]
+    }).then(function(dbProject) {
+      res.json(dbProject);
+    });
+  });
 
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
