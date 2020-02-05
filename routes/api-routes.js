@@ -3,7 +3,7 @@ var db = require("../models");
 var passport = require("../config/passport");
 
 module.exports = function(app) {
-  app.get("/api/home", function(req, res) {
+  app.get("/api/official", function(req, res) {
     db.Official.findAll({}).then(function(dbProject) {
       res.json(dbProject);
     });
@@ -17,6 +17,24 @@ module.exports = function(app) {
       // include: [db.Comments]
     }).then(function(dbProject) {
       res.json(dbProject);
+    });
+  });
+
+  // POST route for saving a new comments
+  app.post("/api/official", function(req, res) {
+    db.Comment.create(req.body).then(function(dbComment) {
+      res.json(dbComment);
+    });
+  });
+
+  // DELETE route for deleting comments
+  app.delete("/api/comments/:id", function(req, res) {
+    db.Comment.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbComment) {
+      res.json(dbComment);
     });
   });
 
