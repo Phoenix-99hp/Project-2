@@ -32,3 +32,6 @@ button {
 .searchBtn {
   position: absolute;
 }
+.col-sm-3 {
+  margin-bottom: 15px;
+}
