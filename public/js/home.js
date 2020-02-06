@@ -45,7 +45,8 @@ $("#searchBtn").on("click", function (e) {
       $(".modal").toggleClass("is-active");
       $("html").toggleClass("is-clipped");
     }
-    $(".moreLink").click(toggleModalClasses, populateModal);
+    $(".moreLink").click(toggleModalClasses);
+    $(".moreLink").click(populateModal);
     $(".close-modal").click(toggleModalClasses);
 
   });
