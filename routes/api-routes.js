@@ -3,8 +3,8 @@ var db = require("../models");
 // var passport = require("../config/passport");
 
 module.exports = function(app) {
-  app.get("/api/official_comments/:id", function(req, res) {
-    db.Official.findOne({
+  app.get("/api/comments/:id", function(req, res) {
+    db.Person.findOne({
       where: {
         id: req.params.id
       },
@@ -15,22 +15,23 @@ module.exports = function(app) {
   });
 
   // POST route for saving a new comments
-  app.post("/api/official_comment", function(req, res) {
+  app.post("/api/comments", function(req, res) {
     db.Comment.create(req.body).then(function(dbComment) {
       res.json(dbComment);
     });
   });
 
   // DELETE route for deleting comments
-  app.delete("/api/comments/:id", function(req, res) {
-    db.Comment.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(dbComment) {
-      res.json(dbComment);
-    });
-  });
+  // WIP
+  // app.delete("/api/comments/:id", function(req, res) {
+  //   db.Comment.destroy({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function(dbComment) {
+  //     res.json(dbComment);
+  //   });
+  // });
 
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
