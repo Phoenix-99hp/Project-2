@@ -13,15 +13,15 @@ $("#searchBtn").on("click", function (e) {
             var officialCard = $("<div class='card'>");
             var officialImage;
             if (data[i].photoUrl) {
-                officialImage = $("<img src='" + data[i].photoUrl + "' class='card-img-top' alt='Official Photo'>");
+                officialImage = $("<div class='card-image'><figure><img src='" + data[i].photoUrl + "' alt='Placeholder image'></figure></div>");
             } else {
-                officialImage = $("<img src='https://via.placeholder.com/150' class='card-img-top' alt='Official Photo'>");
+                officialImage = $("<div class='card-image'><figure class='image is-4by3'><img src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image'></figure></div>");
             }
             officialCard.append(officialImage);
-            officialCard.append("<div class='card-body'><h5 class='card-title'>" + data[i].name + "</h5><p class='card-text'>Party: " + data[i].party + "</p><a href='" + data[i].urls + "' target='_blank' class='btn btn-primary'>Read More</a></div></div >");
-            var cardColumn = $("<div class='col-sm-3'>");
+            officialCard.append("<div class='card-content'><div class='content'><h5>" + data[i].name + "</h5><p>Party: " + data[i].party + "</p><a href='#'>Read More</a><br><a href='" + data[i].urls + "' target='_blank' class='btn btn-primary'>Official Site</a></div></div ></div>");
+            var cardColumn = $("<div class='column is-3'>");
             cardColumn.append(officialCard);
-            $(".officials-row").append(cardColumn);
+            $(".columns").append(cardColumn);
 
         }
     });
