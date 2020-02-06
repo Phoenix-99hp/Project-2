@@ -15,7 +15,7 @@ module.exports = function(app) {
   });
 
   // POST route for saving a new comments
-  app.post("/api/official", function(req, res) {
+  app.post("/api/official_comment", function(req, res) {
     db.Comment.create(req.body).then(function(dbComment) {
       res.json(dbComment);
     });

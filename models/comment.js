@@ -1,7 +1,17 @@
 module.exports = function(sequelize, DataTypes) {
   var Comment = sequelize.define("Comment", {
-    type: DataTypes.STRING,
-    allowNull: true
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    body: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    }
   });
 
   Comment.associate = function(models) {
