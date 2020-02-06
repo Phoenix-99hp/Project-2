@@ -2,7 +2,7 @@
 var db = require("../models");
 // var passport = require("../config/passport");
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Post route for saving new person to Peoples table
   app.post("/api/official", function(req, res) {
     if (req.body.name === db.Person.name) {
@@ -44,6 +44,7 @@ module.exports = function(app) {
   // });
 
   // POST route for saving a new comments
+<<<<<<< HEAD
   app.post("/api/comments", function(req, res) {
     if (!req.body.text) {
       return res.status(400).send({
@@ -51,6 +52,10 @@ module.exports = function(app) {
       });
     }
     db.Comment.create(req.body).then(function(dbComment) {
+=======
+  app.post("/api/comments", function (req, res) {
+    db.Comment.create(req.body).then(function (dbComment) {
+>>>>>>> master
       res.json(dbComment);
     });
   });
