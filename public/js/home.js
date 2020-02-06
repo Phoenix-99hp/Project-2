@@ -47,15 +47,21 @@ $("#searchBtn").on("click", function (e) {
       $(".columns").append(cardColumn);
     }
 
+    function populateModal() {
+      var modalTitle = $(".modal-card-title");
+      var modalBody = $(".modal-card-body");
+      modalTitle.append(EventTarget.name);
+      modalBody.append("<p>Party: " + EventTarget.party + "</p>");
+    }
+
     // // Create click event that opens a modal when user clicks "Read More" on an official's card, and closes when the user clicks the background, footer, or "x" button.
     function toggleModalClasses(event) {
       event.preventDefault();
       $(".modal").toggleClass("is-active");
       $("html").toggleClass("is-clipped");
     }
-    $(".open-modal").click(toggleModalClasses);
+    $(".open-modal").click(toggleModalClasses, populateModal);
     $(".close-modal").click(toggleModalClasses);
-
 
   });
 });
