@@ -13,6 +13,11 @@ $("#searchBtn").on("click", function (e) {
   }).then(function (response) {
     console.log(response);
     var data = response.officials;
+
+    // ====================
+    // For loop will populate page with cards. Cards contain info from API.
+    // ====================
+
     for (var i = 0; i < data.length; i++) {
       var officialCard = $("<div class='card'>");
       var officialImage;
@@ -33,7 +38,7 @@ $("#searchBtn").on("click", function (e) {
         data[i].name +
         "</h5><p>Party: " +
         data[i].party +
-        "</p><a href='#' class='modalLink'>Read More</a><br><a href='" +
+        "</p><a href='#' class='open-modal'>Read More</a><br><a href='" +
         data[i].urls +
         "' target='_blank' class='btn btn-primary'>Official Site</a></div></div ></div>"
       );
@@ -41,17 +46,16 @@ $("#searchBtn").on("click", function (e) {
       cardColumn.append(officialCard);
       $(".columns").append(cardColumn);
     }
-    // Create click event that opens a modal when user clicks "Read More" on an official's card.
-    $(".modalLink").on("click", function (event) {
-      event.preventDefault();
-      $(".modal").addClass("is-active");
-    });
 
-    // Create click event that closes the modal when user clicks on the footer or modal background.
-    $(".modal-background").on("click", function (event) {
+    // // Create click event that opens a modal when user clicks "Read More" on an official's card, and closes when the user clicks the background, footer, or "x" button.
+    function toggleModalClasses(event) {
       event.preventDefault();
-      $(".modal").classList.remove(".is-active");
-    });
+      $(".modal").toggleClass("is-active");
+      $("html").toggleClass("is-clipped");
+    }
+    $(".open-modal").click(toggleModalClasses);
+    $(".close-modal").click(toggleModalClasses);
+
 
   });
 });
