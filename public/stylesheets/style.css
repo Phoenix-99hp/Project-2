@@ -36,12 +36,12 @@ button {
 .loginpanel {
   margin-top: 10%;
 }
-
-* {
+/* 
+.container {
 font-family: 'Montserrat', sans-serif;
-}
+} */
 
-.title{
+.title {
   font-size: 175%;
 }
 
