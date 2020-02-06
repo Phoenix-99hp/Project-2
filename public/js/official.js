@@ -1,21 +1,23 @@
-// // When the page loads, grab and display info by name
-// $.get("/api/all", function (data) {
+// When the page loads, grab and display info by name
+try {
+    $.get("/api/:official", function (data) {
 
-//     if (data.length !== 0) {
+        var officialName = data.name;
+        var officialComments = data.comments;
 
-//         for (var i = 0; i < data.length; i++) {
+        if (data) {
+            $("#name").innerHTML(officialName);
+            var row = $("<div>");
+            row.addClass("comment");
+            row.append("<p>" + officialComments + "</p>");
+        } else {
+            $("#name").innerHTML("Whoops! Something went wrong!");
+        }
 
-//             var row = $("<div>");
-//             row.addClass("chirp");
+    });
+}
 
-//             row.append("<p>" + data[i].author + " chirped.. </p>");
-//             row.append("<p>" + data[i].body + "</p>");
-//             row.append("<p>At " + moment(data[i].created_at).format("h:mma on dddd") + "</p>");
-
-//             $("#chirp-area").prepend(row);
-
-//         }
-
-//     }
-
-// });
+catch (err) {
+    $("name").innerHTML("Whoops! Something went wrong!");
+    console.log(err);
+}
