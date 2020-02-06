@@ -21,10 +21,12 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
+  // Homepage route
   app.get("/home", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/home.html"));
   });
 
+  // Official page route
   app.get("/official", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/official.html"));
   });
