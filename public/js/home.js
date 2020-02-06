@@ -11,6 +11,11 @@ $("#searchBtn").on("click", function (e) {
   }).then(function (response) {
     console.log(response);
     var data = response.officials;
+
+    // ====================
+    // For loop will populate page with cards. Cards contain info from API.
+    // ====================
+
     for (var i = 0; i < data.length; i++) {
       var officialCard = $("<div class='card'>");
       var officialImage;
@@ -26,6 +31,24 @@ $("#searchBtn").on("click", function (e) {
       $(".columns").append(cardColumn);
 
     }
+
+    function populateModal() {
+      var modalTitle = $(".modal-card-title");
+      var modalBody = $(".modal-card-body");
+      modalTitle.append(EventTarget.name);
+      modalBody.append("<p>Party: " + EventTarget.party + "</p>");
+    }
+
+    // // Create click event that opens a modal when user clicks "Read More" on an official's card, and closes when the user clicks the background, footer, or "x" button.
+    function toggleModalClasses(event) {
+      event.preventDefault();
+      $(".modal").toggleClass("is-active");
+      $("html").toggleClass("is-clipped");
+    }
+    $(".moreLink").click(toggleModalClasses);
+    $(".moreLink").click(populateModal);
+    $(".close-modal").click(toggleModalClasses);
+
   });
 });
 
