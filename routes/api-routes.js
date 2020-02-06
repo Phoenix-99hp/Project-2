@@ -3,6 +3,13 @@ var db = require("../models");
 // var passport = require("../config/passport");
 
 module.exports = function(app) {
+  // Post route for saving new person to Peoples table
+  app.post("/api/official", function(req, res) {
+    db.People.create(req.body).then(function(dbPeople) {
+      res.json(dbPeople);
+    });
+  });
+
   app.get("/api/comments/:id", function(req, res) {
     db.Person.findOne({
       where: {
