@@ -10,16 +10,28 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/comments/:id", function(req, res) {
-    db.Person.findOne({
+  // Get route
+  app.get("/api/official/:name", function(req, res) {
+    db.People.findOne({
       where: {
-        id: req.params.id
+        name: req.params.name
       },
       include: [db.Comments]
     }).then(function(dbProject) {
       res.json(dbProject);
     });
   });
+
+  // app.get("/api/comments/:id", function(req, res) {
+  //   db.Person.findOne({
+  //     where: {
+  //       id: req.params.id
+  //     },
+  //     include: [db.Comments]
+  //   }).then(function(dbProject) {
+  //     res.json(dbProject);
+  //   });
+  // });
 
   // POST route for saving a new comments
   app.post("/api/comments", function(req, res) {
