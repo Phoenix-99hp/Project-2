@@ -11,5 +11,16 @@ $("#searchBtn").on("click", function (e) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
+        var data = response.officials;
+        for (var i = 0; i < data.length; i++) {
+
+            var row = $("<div>");
+            row.addClass("test");
+
+            row.append("<p>" + data[i].name + data[i].party + "</p>");
+            row.append("<br>");
+            $(".pet-row").append(row);
+
+        }
     });
 });
