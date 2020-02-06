@@ -32,3 +32,37 @@ button {
 .searchBtn {
   position: absolute;
 }
+
+.split {
+  border: grey;
+  border-style: solid;
+  border-radius: 2px;
+  width: 1px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 50%;
+}
+
+.loginpanel {
+  margin-top: 10%;
+}
+
+* {
+font-family: 'Montserrat', sans-serif;
+}
+
+.title{
+  font-size: 175%;
+}
+
+body {
+  background: ghostwhite;
+}
+
+html {
+  background: ghostwhite;
+}
+
+.navbar {
+  background: ghostwhite;
+}
