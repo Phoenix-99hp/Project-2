@@ -29,8 +29,8 @@ $("#searchBtn").on("click", function (e) {
   });
 });
 
-document.body.addEventListener('click', function (evt) {
-  if (evt.target.className === 'moreLink') {
+document.body.addEventListener("click", function (evt) {
+  if (evt.target.className === "moreLink") {
     console.log("button was clicked");
     clickedOfficialName.splice(0, 1, evt.target.previousSibling.previousSibling.innerText);
     console.log(clickedOfficialName[0]);
@@ -50,10 +50,10 @@ document.body.addEventListener('click', function (evt) {
           break;
         }
       }
-      var newOfficial = {
-        name: response.officials[index].name
-      }
+      // var newOfficial = {
+      //   name: response.officials[index].name
+      // }
       // $.post("/api/offical", newOfficial)
-    })
+    });
   }
 }, false);
