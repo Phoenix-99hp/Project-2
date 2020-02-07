@@ -28,10 +28,11 @@ $("#searchBtn").on("click", function (e) {
       }
       officialCard.append(officialImage);
       officialCard.append("<div class='card-content'><div class='content'><h5>" + data[i].name + "</h5><p>Party: " + data[i].party + "</p><a class='moreLink'>Leave Comment</a><br><a href='" + data[i].urls + "' target='_blank' class='btn btn-primary'>Official Site</a></div></div ></div>");
-      var cardColumn = $("<div class='column is-3'>");
+      var cardColumn = $("<div class='column is-three-quarters-mobile is-one-quarter-tablet is-one-quarter-desktop'>");
       cardColumn.append(officialCard);
       $(".columns").append(cardColumn);
-
+      // var offName = $(event.target).name;
+      // var offParty = $(event.target).party;
     }
   });
 });
@@ -50,14 +51,16 @@ document.body.addEventListener("click", function (evt) {
     modalTitle.append(clickedOfficialName[0]);
     modalBody.append("<p>" + clickedPartyName[0] + "</p>");
     modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>");
-    // Get comments from api/comments/:name
-    // $.get("api/comments/" + clickedOfficialName[0], function (comments) {
+    // Get comments from api/offical/:name
+
+    // $.get("api/official/" + clickedOfficialName[0], function (data) {
     //   //Render comments and append to HTML
-    //   for (var i = 0; i < comments.length; i++) {
-    //     var commentHtml = $("<p>" + comments[i].comment + "</p>");
-    //     modalBody.append(commentHtml);
+    //   for (var i = 0; i < data.length; i++) {
+    //     var dataHtml = $("<p>" + data[i].body + "</p>");
+    //     modalBody.append(dataHtml);
     //   }
     // });
+
     $(".modal").toggleClass("is-active");
     $("html").toggleClass("is-clipped");
   }
@@ -74,11 +77,56 @@ $("#saveBtn").on("click", function () {
 
   if ($("#commentInput").val().trim() !== "" && $("#commentInput").val().trim() !== null) {
 
-    // var newDataObject = {
-    //   name: clickedOfficialName[0],
-    //   comment: $("#commentInput").val().trim()
-    // };
+    var newPersonObject = {
+      name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    };
 
-    // $.post("/api/comments", newDataObject);
+    $.ajax({
+      method: "POST",
+      url: "/api/official",
+      data: newPersonObject
+    })
+      .then(function () {
+        $.ajax({
+          method: "GET",
+          url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+        })
+          .then(function (response) {
+            console.log(response);
+            var newCommentObject = {
+              body: $("#commentInput").val().trim(),
+              PersonId: response.id
+            };
+            console.log(newCommentObject);
+
+            $.ajax({
+              method: "POST",
+              url: "/api/comments",
+              data: newCommentObject
+            });
+          });
+      });
+  }
+  else {
+    console.log("Comment can't be empty!");
   }
 });
+
+
+
+
+
+
+//   $.post("/api/official", newPersonObject)
+//     .then($.get("/api/official/" + clickedOfficialName[0]))
+//     .then();
+// });
+
+// });
+//   var newCommentObject = {
+//     body: $("#commentInput").val().trim(),
+//     PersonId: 
+// }
+
+//   $.post("/api/comments", newCommentObject);
+// });
