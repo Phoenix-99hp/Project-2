@@ -10,18 +10,15 @@ module.exports = function (app) {
         message: "This person already in Database"
       });
     }
-    db.Person.create(req.body).then(function (dbProject) {
+    db.Person.create({
+      name: req.body.name
+    }).then(function (dbProject) {
       res.json(dbProject);
     });
   });
 
   // Get route
   app.get("/api/official/:name", function (req, res) {
-    // if (!name) {
-    //   return res.status(400).send({
-    //     message: "Cannot find in database!"
-    //   });
-    // }
     db.Person.findOne({
       where: {
         name: req.params.name
@@ -44,6 +41,7 @@ module.exports = function (app) {
   // });
 
   // POST route for saving a new comments
+
   app.post("/api/comments", function (req, res) {
     db.Comment.create(req.body).then(function (dbComment) {
       res.json(dbComment);
@@ -52,13 +50,13 @@ module.exports = function (app) {
 
   // DELETE route for deleting comments
   // WIP
-  // app.delete("/api/comments/:id", function(req, res) {
-  //   db.Comment.destroy({
+  // app.delete("/api/official/:id", function(req, res) {
+  //   db.Person.destroy({
   //     where: {
   //       id: req.params.id
   //     }
-  //   }).then(function(dbComment) {
-  //     res.json(dbComment);
+  //   }).then(function(dbProject) {
+  //     res.json(dbProject);
   //   });
   // });
 
