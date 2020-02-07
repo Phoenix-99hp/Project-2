@@ -29,17 +29,22 @@ $("#searchBtn").on("click", function (e) {
       var cardColumn = $("<div class='column is-3'>");
       cardColumn.append(officialCard);
       $(".columns").append(cardColumn);
-
+      var offName = $(event.target).name;
+      var offParty = $(event.target).party;
     }
+
+    // ====================
+    // Create function to populate modal with specific official's information.
+    // ====================
 
     function populateModal() {
       var modalTitle = $(".modal-card-title");
       var modalBody = $(".modal-card-body");
-      modalTitle.append(EventTarget.name);
-      modalBody.append("<p>Party: " + EventTarget.party + "</p>");
+      $(modalTitle).html(offName);
+      $(modalBody).html("<p>Party: " + offParty + "</p>");
     }
 
-    // // Create click event that opens a modal when user clicks "Read More" on an official's card, and closes when the user clicks the background, footer, or "x" button.
+    // // Create click event that opens a modal when user clicks "Read More" on an official's card, and closes when the user clicks the background, save button, cancel button, or "x" button.
     function toggleModalClasses(event) {
       event.preventDefault();
       $(".modal").toggleClass("is-active");
