@@ -43,11 +43,36 @@ module.exports = function (app) {
 
   // POST route for saving a new comments
 
+  // Drake's code
+  // app.post("/api/comments", function (req, res) {
+  //   db.Comment.create(req.body).then(function (dbComment) {
+  //     res.json(dbComment);
+  //   });
+  // });
+
+  // Bek's code
   app.post("/api/comments", function (req, res) {
-    db.Comment.create(req.body).then(function (dbComment) {
+    if (!req.body.body) {
+      return res.status(400).send({
+        message: "Body shouldn't be empty!"
+      });
+    }
+    db.Comment.create({
+      body: req.body.body,
+      PersonId: req.body.PersonId
+    }).then(function (dbComment) {
       res.json(dbComment);
     });
   });
+
+
+
+
+
+
+
+
+
 
   // DELETE route for deleting comments
   // WIP
