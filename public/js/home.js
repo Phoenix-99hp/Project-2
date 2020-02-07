@@ -72,19 +72,40 @@ function toggleModalClasses() {
 
 $(".close-modal").click(toggleModalClasses);
 
-// $("#saveBtn").on("click", function () {
+$("#saveBtn").on("click", function () {
 
-//   if ($("#commentInput").val().trim() !== "" && $("#commentInput").val().trim() !== null) {
+  //   if ($("#commentInput").val().trim() !== "" || $("#commentInput").val().trim() !== null) {
 
-//     var newPersonObject = {
-//       name: clickedOfficialName[0]
-//     }
+  var newPersonObject = {
+    name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+  };
 
-//     var newCommentObject = {
-//       comment: $("#commentInput").val().trim()
-//     }
+  $.ajax({
+    method: "POST",
+    url: "/api/official",
+    data: newPersonObject
+  })
+    .then(function () {
+      $.ajax({
+        method: "GET",
+        url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+      })
+        .then(function (response) {
+          console.log(response);
+        });
+    });
+});
 
-//     $.post("/api/official", newPersonObject);
-//     $.post("/api/comments", newCommentObject);
-//   }
+//   $.post("/api/official", newPersonObject)
+//     .then($.get("/api/official/" + clickedOfficialName[0]))
+//     .then();
+// });
+
+// });
+//   var newCommentObject = {
+//     body: $("#commentInput").val().trim(),
+//     PersonId: 
+// }
+
+//   $.post("/api/comments", newCommentObject);
 // });
