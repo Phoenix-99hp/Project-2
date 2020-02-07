@@ -19,6 +19,7 @@ module.exports = function (app) {
 
   // Get route
   app.get("/api/official/:name", function (req, res) {
+
     db.Person.findOne({
       where: {
         name: req.params.name
