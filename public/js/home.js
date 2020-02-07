@@ -92,9 +92,25 @@ $("#saveBtn").on("click", function () {
       })
         .then(function (response) {
           console.log(response);
+          var newCommentObject = {
+            body: $("#commentInput").val().trim(),
+            PersonId: response.id
+          };
+          console.log(newCommentObject);
+
+          $.ajax({
+            method: "POST",
+            url: "/api/comments",
+            data: newCommentObject
+          });
         });
     });
 });
+
+
+
+
+
 
 //   $.post("/api/official", newPersonObject)
 //     .then($.get("/api/official/" + clickedOfficialName[0]))
