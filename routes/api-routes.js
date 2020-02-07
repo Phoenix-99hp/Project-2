@@ -2,32 +2,29 @@
 var db = require("../models");
 // var passport = require("../config/passport");
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Post route for saving new person to Peoples table
-  app.post("/api/official", function (req, res) {
+  app.post("/api/official", function(req, res) {
     if (req.body.name === db.Person.name) {
       return res.status(400).send({
         message: "This person already in Database"
       });
     }
-    db.Person.create(req.body).then(function (dbProject) {
+    db.Person.create({
+      name: req.body.name
+    }).then(function(dbProject) {
       res.json(dbProject);
     });
   });
 
   // Get route
-  app.get("/api/official/:name", function (req, res) {
-    if (!name) {
-      return res.status(400).send({
-        message: "Cannot find in database!"
-      });
-    }
+  app.get("/api/official/:name", function(req, res) {
     db.Person.findOne({
       where: {
         name: req.params.name
       },
       include: [db.Comment]
-    }).then(function (dbProject) {
+    }).then(function(dbProject) {
       res.json(dbProject);
     });
   });
@@ -44,26 +41,29 @@ module.exports = function (app) {
   // });
 
   // POST route for saving a new comments
-  app.post("/api/comments", function (req, res) {
-    if (!req.body.text) {
+  app.post("/api/comments", function(req, res) {
+    if (!req.body.body) {
       return res.status(400).send({
-        message: "Text shouldn't be empty!"
+        message: "Body shouldn't be empty!"
       });
     }
-    db.Comment.create(req.body).then(function (dbComment) {
+    db.Comment.create({
+      body: req.body.body,
+      PersonId: req.body.PersonId
+    }).then(function(dbComment) {
       res.json(dbComment);
     });
   });
 
   // DELETE route for deleting comments
   // WIP
-  // app.delete("/api/comments/:id", function(req, res) {
-  //   db.Comment.destroy({
+  // app.delete("/api/official/:id", function(req, res) {
+  //   db.Person.destroy({
   //     where: {
   //       id: req.params.id
   //     }
-  //   }).then(function(dbComment) {
-  //     res.json(dbComment);
+  //   }).then(function(dbProject) {
+  //     res.json(dbProject);
   //   });
   // });
 
