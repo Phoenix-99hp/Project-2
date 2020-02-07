@@ -17,11 +17,11 @@ module.exports = function (app) {
 
   // Get route
   app.get("/api/official/:name", function (req, res) {
-    if (!name) {
-      return res.status(400).send({
-        message: "Cannot find in database!"
-      });
-    }
+    // if (!name) {
+    //   return res.status(400).send({
+    //     message: "Cannot find in database!"
+    //   });
+    // }
     db.Person.findOne({
       where: {
         name: req.params.name
@@ -45,11 +45,6 @@ module.exports = function (app) {
 
   // POST route for saving a new comments
   app.post("/api/comments", function (req, res) {
-    if (!req.body.text) {
-      return res.status(400).send({
-        message: "Text shouldn't be empty!"
-      });
-    }
     db.Comment.create(req.body).then(function (dbComment) {
       res.json(dbComment);
     });
