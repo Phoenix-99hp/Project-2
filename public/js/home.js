@@ -48,7 +48,7 @@ document.body.addEventListener("click", function (evt) {
     // Add clicked official name and party to modal from array
     modalTitle.append(clickedOfficialName[0]);
     modalBody.append("<p>" + clickedPartyName[0] + "</p>");
-    modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>")
+    modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>");
     // Get comments from api/comments/:name
     // $.get("api/comments/" + clickedOfficialName[0], function (comments) {
     //   //Render comments and append to HTML
@@ -65,18 +65,18 @@ document.body.addEventListener("click", function (evt) {
 function toggleModalClasses() {
   $(".modal").toggleClass("is-active");
   $("html").toggleClass("is-clipped");
-};
+}
 
 $(".close-modal").click(toggleModalClasses);
 
-$("#saveBtn").on("click", function (evt) {
+$("#saveBtn").on("click", function () {
 
-  if (comment.val().trim() !== "" && comment.val().trim() !== null) {
+  if ($("#commentInput").val().trim() !== "" && $("#commentInput").val().trim() !== null) {
 
-    var newDataObject = {
-      name: clickedOfficialName[0],
-      comment: $("#commentInput").val().trim()
-    }
+    // var newDataObject = {
+    //   name: clickedOfficialName[0],
+    //   comment: $("#commentInput").val().trim()
+    // };
 
     // $.post("/api/comments", newDataObject);
   }
