@@ -29,6 +29,9 @@ button {
   display: flex;
   flex-wrap: wrap;
 }
+.column {
+  margin: auto;
+}
 
 img {
   width: 100%;
