@@ -74,37 +74,41 @@ $(".close-modal").click(toggleModalClasses);
 
 $("#saveBtn").on("click", function () {
 
-  //   if ($("#commentInput").val().trim() !== "" || $("#commentInput").val().trim() !== null) {
+  if ($("#commentInput").val().trim() !== "" && $("#commentInput").val().trim() !== null) {
 
-  var newPersonObject = {
-    name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
-  };
+    var newPersonObject = {
+      name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    };
 
-  $.ajax({
-    method: "POST",
-    url: "/api/official",
-    data: newPersonObject
-  })
-    .then(function () {
-      $.ajax({
-        method: "GET",
-        url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
-      })
-        .then(function (response) {
-          console.log(response);
-          var newCommentObject = {
-            body: $("#commentInput").val().trim(),
-            PersonId: response.id
-          };
-          console.log(newCommentObject);
+    $.ajax({
+      method: "POST",
+      url: "/api/official",
+      data: newPersonObject
+    })
+      .then(function () {
+        $.ajax({
+          method: "GET",
+          url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+        })
+          .then(function (response) {
+            console.log(response);
+            var newCommentObject = {
+              body: $("#commentInput").val().trim(),
+              PersonId: response.id
+            };
+            console.log(newCommentObject);
 
-          $.ajax({
-            method: "POST",
-            url: "/api/comments",
-            data: newCommentObject
+            $.ajax({
+              method: "POST",
+              url: "/api/comments",
+              data: newCommentObject
+            });
           });
-        });
-    });
+      });
+  }
+  else {
+    console.log("Comment can't be empty!");
+  }
 });
 
 
