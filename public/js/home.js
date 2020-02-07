@@ -50,14 +50,16 @@ document.body.addEventListener("click", function (evt) {
     modalTitle.append(clickedOfficialName[0]);
     modalBody.append("<p>" + clickedPartyName[0] + "</p>");
     modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>");
-    // Get comments from api/comments/:name
-    // $.get("api/comments/" + clickedOfficialName[0], function (comments) {
+    // Get comments from api/offical/:name
+
+    // $.get("api/official/" + clickedOfficialName[0], function (data) {
     //   //Render comments and append to HTML
-    //   for (var i = 0; i < comments.length; i++) {
-    //     var commentHtml = $("<p>" + comments[i].comment + "</p>");
-    //     modalBody.append(commentHtml);
+    //   for (var i = 0; i < data.length; i++) {
+    //     var dataHtml = $("<p>" + data[i].body + "</p>");
+    //     modalBody.append(dataHtml);
     //   }
     // });
+
     $(".modal").toggleClass("is-active");
     $("html").toggleClass("is-clipped");
   }
@@ -70,15 +72,19 @@ function toggleModalClasses() {
 
 $(".close-modal").click(toggleModalClasses);
 
-$("#saveBtn").on("click", function () {
+// $("#saveBtn").on("click", function () {
 
-  if ($("#commentInput").val().trim() !== "" && $("#commentInput").val().trim() !== null) {
+//   if ($("#commentInput").val().trim() !== "" && $("#commentInput").val().trim() !== null) {
 
-    // var newDataObject = {
-    //   name: clickedOfficialName[0],
-    //   comment: $("#commentInput").val().trim()
-    // };
+//     var newPersonObject = {
+//       name: clickedOfficialName[0]
+//     }
 
-    // $.post("/api/comments", newDataObject);
-  }
-});
+//     var newCommentObject = {
+//       comment: $("#commentInput").val().trim()
+//     }
+
+//     $.post("/api/official", newPersonObject);
+//     $.post("/api/comments", newCommentObject);
+//   }
+// });
