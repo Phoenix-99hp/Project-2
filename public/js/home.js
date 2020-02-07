@@ -1,6 +1,7 @@
 var clickedOfficialName = [""];
 var clickedPartyName = [""];
 
+
 $("#searchBtn").on("click", function (e) {
   e.preventDefault();
   var zip = $("#zip").val().trim();
