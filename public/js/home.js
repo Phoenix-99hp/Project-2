@@ -60,6 +60,11 @@ document.body.addEventListener("click", function (evt) {
     //   }
     // });
 
+    $.ajax({
+      method: "GET",
+      url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    }).then(response => console.log(response));
+
     $(".modal").toggleClass("is-active");
     $("html").toggleClass("is-clipped");
   }

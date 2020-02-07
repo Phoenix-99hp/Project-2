@@ -30,13 +30,13 @@ module.exports = function (app) {
     });
   });
 
-  // app.get("/api/comments/:id", function(req, res) {
-  //   db.Person.findOne({
+  // app.get("/api/comments/:id", function (req, res) {
+  //   db.Comment.findOne({
   //     where: {
-  //       id: req.params.id
-  //     },
-  //     include: [db.Comments]
-  //   }).then(function(dbProject) {
+  //       id: req.params.PersonId
+  //     }
+  //     // include: [db.Comments]
+  //   }).then(function (dbProject) {
   //     res.json(dbProject);
   //   });
   // });
