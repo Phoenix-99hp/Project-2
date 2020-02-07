@@ -31,12 +31,12 @@ module.exports = function(sequelize, DataTypes) {
       null
     );
   });
-  User.associate = function(models) {
-    // Associating Users with Comments
-    // When a User is deleted, also delete any associated Comments
-    User.hasMany(models.Comment, {
-      onDelete: "CASCADE"
-    });
-  };
+  // User.associate = function(models) {
+  //   // Associating Users with Comments
+  //   // When a User is deleted, also delete any associated Comments
+  //   User.hasMany(models.Comment, {
+  //     onDelete: "CASCADE"
+  //   });
+  // };
   return User;
 };
