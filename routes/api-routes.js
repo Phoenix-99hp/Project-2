@@ -17,11 +17,11 @@ module.exports = function (app) {
 
   // Get route
   app.get("/api/official/:name", function (req, res) {
-    if (!name) {
-      return res.status(400).send({
-        message: "Cannot find in database!"
-      });
-    }
+    // if (!name) {
+    //   return res.status(400).send({
+    //     message: "Cannot find in database!"
+    //   });
+    // }
     db.Person.findOne({
       where: {
         name: req.params.name
