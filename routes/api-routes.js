@@ -2,42 +2,29 @@
 var db = require("../models");
 // var passport = require("../config/passport");
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Post route for saving new person to Peoples table
-  app.post("/api/official", function (req, res) {
+  app.post("/api/official", function(req, res) {
     if (req.body.name === db.Person.name) {
       return res.status(400).send({
         message: "This person already in Database"
       });
     }
-<<<<<<< HEAD
     db.Person.create({
       name: req.body.name
     }).then(function(dbProject) {
-=======
-    db.Person.create(req.body).then(function (dbProject) {
->>>>>>> master
       res.json(dbProject);
     });
   });
 
   // Get route
-<<<<<<< HEAD
   app.get("/api/official/:name", function(req, res) {
-=======
-  app.get("/api/official/:name", function (req, res) {
-    if (!name) {
-      return res.status(400).send({
-        message: "Cannot find in database!"
-      });
-    }
->>>>>>> master
     db.Person.findOne({
       where: {
         name: req.params.name
       },
       include: [db.Comment]
-    }).then(function (dbProject) {
+    }).then(function(dbProject) {
       res.json(dbProject);
     });
   });
@@ -54,25 +41,16 @@ module.exports = function (app) {
   // });
 
   // POST route for saving a new comments
-<<<<<<< HEAD
   app.post("/api/comments", function(req, res) {
     if (!req.body.body) {
-=======
-  app.post("/api/comments", function (req, res) {
-    if (!req.body.text) {
->>>>>>> master
       return res.status(400).send({
         message: "Body shouldn't be empty!"
       });
     }
-<<<<<<< HEAD
     db.Comment.create({
       body: req.body.body,
       PersonId: req.body.PersonId
     }).then(function(dbComment) {
-=======
-    db.Comment.create(req.body).then(function (dbComment) {
->>>>>>> master
       res.json(dbComment);
     });
   });
