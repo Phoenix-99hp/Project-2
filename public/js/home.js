@@ -57,9 +57,11 @@ document.body.addEventListener("click", function (evt) {
       url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
     }).then(function (response) {
       console.log(response);
-      for (var i = 0; i < response.Comments.length; i++) {
-        var html = $("<div class='comment'>" + response.Comments[i].body + "</div>");
-        modalBody.append(html);
+      if (response !== null) {
+        for (var i = 0; i < response.Comments.length; i++) {
+          var html = $("<div class='comment'>" + response.Comments[i].body + "</div>");
+          modalBody.append(html);
+        }
       }
     });
 
