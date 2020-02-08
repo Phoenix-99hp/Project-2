@@ -51,15 +51,17 @@ document.body.addEventListener("click", function (evt) {
     modalTitle.append(clickedOfficialName[0]);
     modalBody.append("<p>" + clickedPartyName[0] + "</p>");
     modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>");
-    // Get comments from api/offical/:name
-
-    // $.get("api/official/" + clickedOfficialName[0], function (data) {
-    //   //Render comments and append to HTML
-    //   for (var i = 0; i < data.length; i++) {
-    //     var dataHtml = $("<p>" + data[i].body + "</p>");
-    //     modalBody.append(dataHtml);
-    //   }
-    // });
+    // Get comments from api/offical/ then populate modal
+    $.ajax({
+      method: "GET",
+      url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    }).then(function (response) {
+      console.log(response);
+      for (var i = 0; i < response.Comments.length; i++) {
+        var html = $("<div class='comment'>" + response.Comments[i].body + "</div>");
+        modalBody.append(html);
+      }
+    });
 
     $(".modal").toggleClass("is-active");
     $("html").toggleClass("is-clipped");
@@ -80,53 +82,53 @@ $("#saveBtn").on("click", function () {
     var newPersonObject = {
       name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
     };
-
+    // Checks if official is already in database then determines whether to add a new official 
+    // or associate a comment with an existing official
     $.ajax({
-      method: "POST",
-      url: "/api/official",
-      data: newPersonObject
-    })
-      .then(function () {
+      method: "GET",
+      url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    }).then(function (res) {
+      console.log(res);
+      // If official is not in database ....
+      if (res === null) {
         $.ajax({
-          method: "GET",
-          url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+          method: "POST",
+          url: "/api/official",
+          data: newPersonObject
         })
-          .then(function (response) {
-            console.log(response);
-            var newCommentObject = {
-              body: $("#commentInput").val().trim(),
-              PersonId: response.id
-            };
-            console.log(newCommentObject);
-
+          .then(function () {
             $.ajax({
-              method: "POST",
-              url: "/api/comments",
-              data: newCommentObject
-            });
+              method: "GET",
+              url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+            })
+              .then(function (response) {
+                console.log(response);
+                var newCommentObject = {
+                  body: $("#commentInput").val().trim(),
+                  PersonId: response.id
+                };
+                console.log(newCommentObject);
+                $.ajax({
+                  method: "POST",
+                  url: "/api/comments",
+                  data: newCommentObject
+                });
+              });
           });
-      });
-  }
-  else {
-    console.log("Comment can't be empty!");
+      }
+      // If official is in database...
+      else {
+        var newCommentObject = {
+          body: $("#commentInput").val().trim(),
+          PersonId: res.id
+        };
+        console.log(newCommentObject);
+        $.ajax({
+          method: "POST",
+          url: "/api/comments",
+          data: newCommentObject
+        });
+      }
+    });
   }
 });
-
-
-
-
-
-
-//   $.post("/api/official", newPersonObject)
-//     .then($.get("/api/official/" + clickedOfficialName[0]))
-//     .then();
-// });
-
-// });
-//   var newCommentObject = {
-//     body: $("#commentInput").val().trim(),
-//     PersonId: 
-// }
-
-//   $.post("/api/comments", newCommentObject);
-// });
