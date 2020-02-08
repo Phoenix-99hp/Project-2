@@ -112,3 +112,12 @@ canvas {
   margin-top: 10%;
   border-radius: 5px;
 }
+
+.comment {
+  width: 100%;
+  background-color: ghostwhite;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
