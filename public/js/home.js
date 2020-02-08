@@ -1,6 +1,7 @@
 var clickedOfficialName = [""];
 var clickedPartyName = [""];
 
+
 $("#searchBtn").on("click", function (e) {
   e.preventDefault();
   var zip = $("#zip").val().trim();
@@ -50,15 +51,19 @@ document.body.addEventListener("click", function (evt) {
     modalTitle.append(clickedOfficialName[0]);
     modalBody.append("<p>" + clickedPartyName[0] + "</p>");
     modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>");
-    // Get comments from api/offical/:name
-
-    // $.get("api/official/" + clickedOfficialName[0], function (data) {
-    //   //Render comments and append to HTML
-    //   for (var i = 0; i < data.length; i++) {
-    //     var dataHtml = $("<p>" + data[i].body + "</p>");
-    //     modalBody.append(dataHtml);
-    //   }
-    // });
+    // Get comments from api/offical/ then populate modal
+    $.ajax({
+      method: "GET",
+      url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    }).then(function (response) {
+      console.log(response);
+      if (response !== null) {
+        for (var i = 0; i < response.Comments.length; i++) {
+          var html = $("<div class='comment'>" + response.Comments[i].body + "</div>");
+          modalBody.append(html);
+        }
+      }
+    });
 
     $.ajax({
       method: "GET",
@@ -79,54 +84,58 @@ $(".close-modal").click(toggleModalClasses);
 
 $("#saveBtn").on("click", function () {
 
-  //   if ($("#commentInput").val().trim() !== "" || $("#commentInput").val().trim() !== null) {
+  if ($("#commentInput").val().trim() !== "" && $("#commentInput").val().trim() !== null) {
 
-  var newPersonObject = {
-    name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
-  };
-
-  $.ajax({
-    method: "POST",
-    url: "/api/official",
-    data: newPersonObject
-  })
-    .then(function () {
-      $.ajax({
-        method: "GET",
-        url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
-      })
-        .then(function (response) {
-          console.log(response);
-          var newCommentObject = {
-            body: $("#commentInput").val().trim(),
-            PersonId: response.id
-          };
-          console.log(newCommentObject);
-
-          $.ajax({
-            method: "POST",
-            url: "/api/comments",
-            data: newCommentObject
+    var newPersonObject = {
+      name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    };
+    // Checks if official is already in database then determines whether to add a new official 
+    // or associate a comment with an existing official
+    $.ajax({
+      method: "GET",
+      url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+    }).then(function (res) {
+      console.log(res);
+      // If official is not in database ....
+      if (res === null) {
+        $.ajax({
+          method: "POST",
+          url: "/api/official",
+          data: newPersonObject
+        })
+          .then(function () {
+            $.ajax({
+              method: "GET",
+              url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
+            })
+              .then(function (response) {
+                console.log(response);
+                var newCommentObject = {
+                  body: $("#commentInput").val().trim(),
+                  PersonId: response.id
+                };
+                console.log(newCommentObject);
+                $.ajax({
+                  method: "POST",
+                  url: "/api/comments",
+                  data: newCommentObject
+                });
+              });
           });
+      }
+      // If official is in database...
+      else {
+        var newCommentObject = {
+          body: $("#commentInput").val().trim(),
+          PersonId: res.id
+        };
+        console.log(newCommentObject);
+        $.ajax({
+          method: "POST",
+          url: "/api/comments",
+          data: newCommentObject
         });
+      }
     });
+  }
 });
-
-
-
-
-
-
-//   $.post("/api/official", newPersonObject)
-//     .then($.get("/api/official/" + clickedOfficialName[0]))
-//     .then();
-// });
-
-// });
-//   var newCommentObject = {
-//     body: $("#commentInput").val().trim(),
-//     PersonId: 
-// }
-
-//   $.post("/api/comments", newCommentObject);
-// });
