@@ -29,7 +29,7 @@ $("#searchBtn").on("click", function (e) {
         officialImage = $("<div class='card-image'><figure class='image is-4by3'><img src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image'></figure></div>");
       }
       officialCard.append(officialImage);
-      officialCard.append("<div class='card-content'><div class='content'><h5>" + data[i].name + "</h5><p>Party: " + data[i].party + "</p><a class='moreLink'>Leave Comment</a><br><a href='" + data[i].urls + "' target='_blank' class='btn btn-primary'>Official Site</a></div></div ></div>");
+      officialCard.append("<div class='card-content'><div class='content'><h5>" + data[i].name + "</h5><p>Party: " + data[i].party + "</p><a class='moreLink'>• Leave Comment</a><br><a href='" + data[i].urls + "' target='_blank' class='btn btn-primary'>• Official Site</a></div></div ></div>");
       var cardColumn = $("<div class='column is-three-quarters-mobile is-one-quarter-tablet is-one-quarter-desktop'>");
       cardColumn.append(officialCard);
       $(".columns").append(cardColumn);
