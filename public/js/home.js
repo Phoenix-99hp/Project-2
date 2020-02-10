@@ -4,8 +4,6 @@ var clickedPartyName = [""];
 
 $("#searchBtn").on("click", function (e) {
   e.preventDefault();
-  $("#welcomeCard").css("display", "none");
-  $("#imageContainer").empty();
   var zip = $("#zip").val().trim();
   var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCWvaHq1bAZ111hZ4qrZd6pdazM9LBEBcc&address=" + zip;
 
@@ -52,19 +50,29 @@ document.body.addEventListener("click", function (evt) {
     // Add clicked official name and party to modal from array
     modalTitle.append(clickedOfficialName[0]);
     modalBody.append("<p>" + clickedPartyName[0] + "</p>");
-    modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>");
+    //################################
+    if($("#isLoggedIn").length){
+      modalBody.append("<label>Comment: </label><textarea id='commentInput'></textarea>");
+      $("#saveBtn").removeClass("is-hidden");
+    }else{
+      $("#saveBtn").addClass("is-hidden");
+      modalBody.append("<h3 class='is-italic is-size-7'>You need to loggin before you can leave a comment <br> <a href='/login'>Login</a> / <a href='/signup'>Sign Up</a></h3>");
+    }
+    //################################
     // Get comments from api/offical/ then populate modal
     $.ajax({
       method: "GET",
       url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
     }).then(function (response) {
       console.log(response);
-      if (response !== null) {
+      //#################################
+      if (response.Comments){
         for (var i = 0; i < response.Comments.length; i++) {
-          var html = $("<div class='comment'>" + response.Comments[i].body + "</div>");
+          var html = $("<div class='comment'>" + response.Comments[i].body + "<span class='is-pulled-right is-italic'>" +response.Comments[i].User.nickname + "</span>" + "</div>");
           modalBody.append(html);
         }
       }
+      //#################################
     });
 
     $(".modal").toggleClass("is-active");
@@ -86,7 +94,7 @@ $("#saveBtn").on("click", function () {
     var newPersonObject = {
       name: clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
     };
-    // Checks if official is already in database then determines whether to add a new official 
+    // Checks if official is already in database then determines whether to add a new official
     // or associate a comment with an existing official
     $.ajax({
       method: "GET",

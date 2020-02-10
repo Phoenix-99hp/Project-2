@@ -49,14 +49,12 @@ button {
 .title {
   font-size: xx-large;
   color: black;
-  margin-top: 2%;
 }
 
 body {
-  background: #009FE1;
+  background: ghostwhite;
   font-family: 'Montserrat', sans-serif;
   color: black;
-  margin: 2%;
 }
 
 html {
@@ -115,11 +113,6 @@ canvas {
   border-radius: 5px;
 }
 
-.search-row {
-  margin: 3%;
-  margin-top: 1%;
-}
-
 .comment {
   width: 100%;
   background-color: ghostwhite;
@@ -127,4 +120,8 @@ canvas {
   padding-left: 10px;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+.w-100{
+  width: 100%;
 }

@@ -1,0 +1,54 @@
+<section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <form action="/api/create-user" method="post" class="box">
+                        <div class="field">
+                            <label for="" class="label">Email</label>
+                            <div class="control has-icons-left">
+                                <input name="email" type="email" placeholder="e.g. bobsmith@gmail.com" class="input w-100" required>
+                                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="" class="label">Nickname</label>
+                            <div class="control has-icons-left">
+                                <input name="nickname" type="text" placeholder="Name to display" class="input w-100" required>
+                                <span class="icon is-small is-left">
+                  <i class="fa fa-user-alt"></i>
+                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="" class="label">Password</label>
+                            <div class="control has-icons-left">
+                                <input name="password" type="password" placeholder="*******" class="input w-100" required>
+                                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+                            </div>
+                        </div>
+                        <div class="field has-text-centered">
+                            <button class="button is-success">
+                                Register
+                            </button>
+                        </div>
+                        <div class="field has-text-centered">
+                            or <br> <a href="/signup">Login</a> / <a href="/">Home</a>
+                        </div>
+                        {{#if error}}
+                            <article class="message is-danger">
+                                <div class="message-body">
+                                    {{error}}
+                                </div>
+                            </article>
+                        {{/if}}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
