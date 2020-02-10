@@ -4,6 +4,8 @@ var clickedPartyName = [""];
 
 $("#searchBtn").on("click", function (e) {
   e.preventDefault();
+  $("#welcomeCard").css("display", "none");
+  $("#imageContainer").empty();
   var zip = $("#zip").val().trim();
   var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCWvaHq1bAZ111hZ4qrZd6pdazM9LBEBcc&address=" + zip;
 
@@ -57,9 +59,11 @@ document.body.addEventListener("click", function (evt) {
       url: "/api/official/" + clickedOfficialName[0].replace(/\s+/g, "").toLowerCase()
     }).then(function (response) {
       console.log(response);
-      for (var i = 0; i < response.Comments.length; i++) {
-        var html = $("<div class='comment'>" + response.Comments[i].body + "</div>");
-        modalBody.append(html);
+      if (response !== null) {
+        for (var i = 0; i < response.Comments.length; i++) {
+          var html = $("<div class='comment'>" + response.Comments[i].body + "</div>");
+          modalBody.append(html);
+        }
       }
     });
 
