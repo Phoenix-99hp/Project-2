@@ -96,8 +96,17 @@ textarea {
 }
 
 .starLogo {
-  width: 5%;
+  width: 2%;
   height: auto;
+  margin-right: 3%;
+}
+
+#firstStar {
+  margin-right: 5%;
+}
+
+#lastStar {
+  margin-left: 5%;
 }
 
 
@@ -142,7 +151,7 @@ canvas {
 }
 
 #searchBtn:hover {
-  background: darkblue;
+  background: navy;
   color: white;
 }
 
@@ -153,4 +162,10 @@ canvas {
 .modal-card-head {
   background: #009FE1;
   font-weight: bold;
+}
+
+@media screen and (max-width: 925px) {
+  img.starLogo{
+    display:none;
+  }
 }
