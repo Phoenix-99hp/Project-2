@@ -89,10 +89,15 @@ textarea {
   height: 200px;
 }
 
-.lookupLogo {
+.sealLogo {
   width: 7%;
   height: auto;
   margin-block-end: -2%;
+}
+
+.starLogo {
+  width: 5%;
+  height: auto;
 }
 
 
@@ -111,7 +116,6 @@ canvas {
 
 .card-content {
   background: ghostwhite;
-  margin-top: 10%;
   border-radius: 5px;
 }
 
@@ -127,4 +131,26 @@ canvas {
   padding-left: 10px;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+.card {
+  border-style: solid;
+  border-color: maroon;
+  border-width: 2px;
+  padding: 0%;
+  margin: 2%;
+}
+
+#searchBtn:hover {
+  background: darkblue;
+  color: white;
+}
+
+#welcomeCard {
+  margin-top: 10%;
+}
+
+.modal-card-head {
+  background: #009FE1;
+  font-weight: bold;
 }
