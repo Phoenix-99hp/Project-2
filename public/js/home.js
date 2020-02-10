@@ -37,6 +37,11 @@ $("#searchBtn").on("click", function (e) {
   });
 });
 
+
+$("#searchBtn").on("click", function() {
+  $("#welcomeCard").css("display","none");
+});
+
 document.body.addEventListener("click", function (evt) {
   if (evt.target.className === "moreLink") {
     console.log("button was clicked");
