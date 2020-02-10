@@ -13,15 +13,14 @@ var db = {};
 
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]); // eslint-disable-line no-redeclare
+} else {
+  var sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  ); // eslint-disable-line no-redeclare
 }
-// else {
-//   var sequelize = new Sequelize(
-//     config.database,
-//     config.username,
-//     config.password,
-//     config
-//   ); // eslint-disable-line no-redeclare
-// }
 
 fs.readdirSync(__dirname)
   .filter(function(file) {
