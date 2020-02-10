@@ -4,6 +4,8 @@ var clickedPartyName = [""];
 
 $("#searchBtn").on("click", function (e) {
   e.preventDefault();
+  $("#welcomeCard").css("display", "none");
+  $("#imageContainer").empty();
   var zip = $("#zip").val().trim();
   var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCWvaHq1bAZ111hZ4qrZd6pdazM9LBEBcc&address=" + zip;
 
@@ -35,11 +37,6 @@ $("#searchBtn").on("click", function (e) {
       // var offParty = $(event.target).party;
     }
   });
-});
-
-
-$("#searchBtn").on("click", function() {
-  $("#welcomeCard").css("display","none");
 });
 
 document.body.addEventListener("click", function (evt) {
