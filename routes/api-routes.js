@@ -50,7 +50,14 @@ module.exports = function(app) {
   // });
 
   // Bek's code
+
+  // // This comments with sign-up
   app.post("/api/comments", function(req, res) {
+    if (!req.session.user) {
+      return res.status(400).send({
+        message: "You should be logged in before you can leave a comment"
+      });
+    }
     if (!req.body.body) {
       return res.status(400).send({
         message: "Body shouldn't be empty!"
@@ -58,11 +65,81 @@ module.exports = function(app) {
     }
     db.Comment.create({
       body: req.body.body,
-      PersonId: req.body.PersonId
+      PersonId: req.body.PersonId,
+      UserId: req.session.user.id
     }).then(function(dbComment) {
       res.json(dbComment);
     });
   });
+
+  //##################################################
+  app.post("/api/create-user", function(req, res) {
+    if (!req.body.email || !req.body.password) {
+      res.redirect("/signup?error=Please fill all inputs");
+    }
+    db.User.findOne({
+      where: {
+        email: req.body.email
+      }
+    }).then(exist => {
+      if (exist) {
+        res.redirect("/signup?error=Such user alread exist");
+      } else {
+        db.User.create({
+          email: req.body.email,
+          password: req.body.password
+        }).then(result => {
+          delete result.password;
+          req.session.user = result;
+          res.redirect("/members");
+        });
+      }
+    });
+  });
+
+  app.post("/api/login", function(req, res) {
+    if (!req.body.email || !req.body.password) {
+      res.redirect("/login?error=Please fill all inputs");
+    }
+    db.User.findOne({
+      where: {
+        email: req.body.email
+      }
+    }).then(exist => {
+      if (!exist) {
+        res.redirect("/login?error=User Doesn't exist");
+      } else if (!exist.validPassword(req.body.password)) {
+        res.redirect("/login?error=Incorrect password");
+      } else {
+        delete exist.password;
+        req.session.user = exist;
+        res.redirect("/members");
+      }
+    });
+  });
+
+  app.get("/logout", function(req, res) {
+    delete req.session.user;
+    res.redirect("/login");
+  });
+
+  // ########################## This comments without sign-in
+
+  // app.post("/api/comments", function(req, res) {
+  //   if (!req.body.body) {
+  //     return res.status(400).send({
+  //       message: "Body shouldn't be empty!"
+  //     });
+  //   }
+  //   db.Comment.create({
+  //     body: req.body.body,
+  //     PersonId: req.body.PersonId
+  //   }).then(function(dbComment) {
+  //     res.json(dbComment);
+  //   });
+  // });
+
+  // #################
 
   // DELETE route for deleting comments
   // WIP
