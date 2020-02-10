@@ -1,9 +1,11 @@
 <div class="container">
     <div class="has-text-right">
         {{#if user}}
-                <a href="/logout" id="isLoggedIn"  onclick="return confirm('Are you sure you want to logout?')" class="has-text-white"><i class="fa fa-user-alt"></i>{{user.nickname}}</a>
+        <a href="/logout" id="isLoggedIn" onclick="return confirm('Are you sure you want to logout?')"
+            class="has-text-white"><i class="fa fa-user-alt"></i>{{user.nickname}}</a>
         {{else}}
-            <a href="/login"  class="has-text-white"><i class="fa fa-sign-in-alt"></i> Login</a> / <a href="/signup"  class="has-text-white"><i class="fa fa-user-plus"></i> Sign Ups</a>
+        <a href="/login" class="has-text-white"><i class="fa fa-sign-in-alt"></i> Login</a> / <a href="/signup"
+            class="has-text-white"><i class="fa fa-user-plus"></i> Sign Ups</a>
         {{/if}}
     </div>
     <div class="row center">
@@ -14,13 +16,13 @@
     <div class="row center search-row">
         <div class="col-md-12">
             <img class="lookupLogo"
-                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Reverse_of_the_Seal_of_Texas.svg/300px-Reverse_of_the_Seal_of_Texas.svg.png"
-                 , alt="Reverse of the Seal of Texas">
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Reverse_of_the_Seal_of_Texas.svg/300px-Reverse_of_the_Seal_of_Texas.svg.png"
+                , alt="Reverse of the Seal of Texas">
             <label id="zipLabel">Zip Code: </label><input type="Text" class="input" id="zip"></input>
             <button class="button" id="searchBtn">Search</button>
             <img class="lookupLogo"
-                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Great_Seal_of_the_United_States_%28obverse%29.svg/800px-Great_Seal_of_the_United_States_%28obverse%29.svg.png"
-                 , alt="Great Seal of the United States">
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Great_Seal_of_the_United_States_%28obverse%29.svg/800px-Great_Seal_of_the_United_States_%28obverse%29.svg.png"
+                , alt="Great Seal of the United States">
         </div>
     </div>
     <!-- <div class="row"> -->
@@ -30,8 +32,8 @@
                 <ul>
                     <li> A simple way to view representatives, local and federal.</li>
                     <li> View comments left by members of the community.</li>
-                    <br />
-                    <time id="time">{time}</time>
+                    {{!-- <br />
+                    <time id="time">{time}</time> --}}
                 </ul>
             </div>
         </div>
