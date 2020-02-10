@@ -32,8 +32,6 @@ module.exports = function(app) {
     });
   });
 
-  // Bek's code
-
   // // This comments with sign-up
   app.post("/api/comments", function(req, res) {
     if (!req.session.user) {
@@ -111,5 +109,4 @@ module.exports = function(app) {
     delete req.session.user;
     res.redirect("/login");
   });
-
 };

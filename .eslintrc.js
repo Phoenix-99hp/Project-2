@@ -20,5 +20,6 @@ module.exports = {
     quotes: ["error", "double"],
     semi: ["error", "always"],
     indent: "off"
+    // noRedeclare: [2, { builtinGlobals: true }]
   }
 };
