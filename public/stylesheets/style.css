@@ -119,3 +119,12 @@ canvas {
   margin: 3%;
   margin-top: 1%;
 }
+
+.comment {
+  width: 100%;
+  background-color: ghostwhite;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
