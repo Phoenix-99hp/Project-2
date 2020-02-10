@@ -169,3 +169,7 @@ canvas {
     display:none;
   }
 }
+
+li {
+  font-size: x-large;
+}
