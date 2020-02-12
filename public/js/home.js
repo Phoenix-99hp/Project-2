@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 var clickedOfficialName = [""];
 var clickedPartyName = [""];
 
@@ -7,7 +9,7 @@ $("#searchBtn").on("click", function (e) {
   $("#welcomeCard").css("display", "none");
   $("#imageContainer").empty();
   var zip = $("#zip").val().trim();
-  var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCWvaHq1bAZ111hZ4qrZd6pdazM9LBEBcc&address=" + zip;
+  var repURL = "https://www.googleapis.com/civicinfo/v2/representatives?" + process.env.API_KEY + zip;
 
   $.ajax({
     url: repURL,
